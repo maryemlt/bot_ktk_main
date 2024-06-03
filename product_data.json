@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "type": "denim",
+      "gender": "Man",
+      "colors": ["Light Blue", "Medium Blue", "Dark Blue"],
+      "washTypes": ["Basic", "Vintage wash", "Acid wash"],
+      "mills": ["Mill A", "Mill B", "Mill C"],
+      "priceRestrictions": ["< $50", "$50 - $100", "> $100"]
+    },
+    {
+      "type": "denim",
+      "gender": "Woman",
+      "colors": ["Green Cast", "Blue Black", "Black"],
+      "washTypes": ["Basic+", "Fashion wash"],
+      "mills": ["Mill D", "Mill E"],
+      "priceRestrictions": ["< $60", "$60 - $120", "> $120"]
+    },
+    {
+      "type": "knit",
+      "gender": "Unisex",
+      "colors": ["Grey", "Anthracite grey"],
+      "washTypes": ["Basic", "Basic+", "All other dye techniques"],
+      "mills": ["Mill F", "Mill G", "Mill H"],
+      "priceRestrictions": ["< $30", "$30 - $70", "> $70"]
+    },
+    {
+      "type": "knit",
+      "gender": "Kids",
+      "colors": ["Ecru & White", "Colours", "Overdyed"],
+      "washTypes": ["Basic", "Vintage wash", "Fashion wash"],
+      "mills": ["Mill I", "Mill J"],
+      "priceRestrictions": ["< $40", "$40 - $80", "> $80"]
+    }
+  ]
+}

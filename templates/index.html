@@ -1,0 +1,101 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ Chatbot</title>
+    <style>
+      .chat-container {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        height: 300px;
+        overflow-y: scroll;
+      }  
+
+      input[type="text"] {
+        width: calc(100% - 70px);
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        width: 60px;
+        padding: 10px;
+        margin-left: 10px;
+      }
+
+      #loading {
+        text-align: center;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat-container" id="chat">
+      <!-- The chat history will be displayed here -->
+    </div>
+    <input type="text" id="user_input" placeholder="Ask your question here:" />
+    <button onclick="sendMessage()">Send</button>
+    <div id="loading">Waiting for response...</div>
+
+    <script>
+      function sendMessage() {
+        var userInput = document.getElementById("user_input").value;
+        var loadingIndicator = document.getElementById("loading");
+        var chat = document.getElementById("chat");
+
+        if (userInput.trim()) {
+          // Display the loading indicator
+          loadingIndicator.style.display = "block";
+
+          fetch("/send_message", {
+            method: "POST",
+            body: new URLSearchParams({
+              user_input: userInput,
+            }),
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              chat.innerHTML +=
+                "<div><strong>You:</strong> " + data.user_input + "</div>";
+              chat.innerHTML +=
+                "<div><strong>Bot:</strong> " + data.bot_response + "</div>";
+              // Hide the loading indicator
+              loadingIndicator.style.display = "none";
+              // Scroll to the newest message
+              chat.scrollTop = chat.scrollHeight;
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              // Also hide the loading indicator in case of error
+              loadingIndicator.style.display = "none";
+            });
+
+          // Clear the input for the next message
+          document.getElementById("user_input").value = "";
+        }
+      }
+
+      // Execute a function when the user presses a key on the keyboard
+      document
+        .getElementById("user_input")
+        .addEventListener("keypress", function (event) {
+          // If the user presses the "Enter" key on the keyboard
+          if (event.key === "Enter") {
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            sendMessage();
+          }
+        });
+    </script>
+  </body>
+</html> {% endcomment %}
