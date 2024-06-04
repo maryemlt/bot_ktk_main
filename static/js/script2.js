@@ -133,13 +133,28 @@ function sendMessage() {
     .then((data) => {
       var loadingContainer = document.getElementById(uniqueLoadingId);
       product_type=data.product_mentioned;
-      if(loadGendersCalled &&  data.bot_response.includes("🤔👤?")){
-        loadingContainer.outerHTML ="<div style='margin-bottom: 10px;'>" +
-        "<img src='https://kontakt.com.tn/web/image/292971/Chatbot%20icon.png' alt='Avatar' style='width: 53px; height: 53px; vertical-align: middle;border-radius: 30px;object-fit: cover;' /> " +
-        "<span style='vertical-align: middle;'> asslema </span></div>" ;
-      
-       
-      loadColors();
+      if (loadGendersCalled && data.bot_response.includes("🤔👤?")) {
+        fetch('/get_gender_prompt', {
+          method: 'POST',
+          body: new URLSearchParams({
+            'lan': chatbotState.language  // Assuming chatbotState.language stores the selected language
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          }
+        })
+        .then(response => response.json()) // Parse the response as JSON
+        .then(genderPromptData => {
+          const genderPrompt = genderPromptData.message; // Extract the message field
+          loadingContainer.outerHTML = "<div style='margin-bottom: 10px;'>" +
+            "<img src='https://kontakt.com.tn/web/image/292971/Chatbot%20icon.png' alt='Avatar' style='width: 53px; height: 53px; vertical-align: middle;border-radius: 30px;object-fit: cover;' /> " +
+            "<span style='vertical-align: middle;'>" + genderPrompt + "</span></div>";
+          
+          loadColors();
+        })
+        .catch(error => {
+          console.error('Error fetching gender prompt:', error);
+        });
 
     }else{
       loadingContainer.outerHTML ="<div style='margin-bottom: 10px;'>" +
