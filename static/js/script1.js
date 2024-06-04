@@ -70,8 +70,8 @@ function addChatUserMessage(message) {
   const avatarImage = document.createElement("img");
   avatarImage.src = "https://cdn-icons-png.flaticon.com/512/1077/1077114.png";
   avatarImage.alt = "Avatar";
-  avatarImage.style.width = "40px";
-  avatarImage.style.height = "40px";
+  avatarImage.style.width = "30px";
+  avatarImage.style.height = "30px";
   avatarImage.style.verticalAlign = "middle";
   avatarImage.style.borderRadius = "30px";
   avatarImage.style.objectFit = "cover";
@@ -181,8 +181,19 @@ function showLoadingMessage(show) {
   }
 }
 
-// Load gender options
+
+
+
+
+let gendersDisplayed = false; // Variable pour suivre l'état d'affichage des genres
+
 export function loadGenders() {
+  // Vérifier si les genres ont déjà été affichés
+  if (gendersDisplayed) {
+    // Les genres ont déjà été affichés, donc ne rien faire
+    return;
+  }
+
   const gendersContainer = document.getElementById("gendersContainer");
   
   // Clear any previous buttons from the container
@@ -196,7 +207,7 @@ export function loadGenders() {
   genders.forEach((gender) => {
     createButton(gender, "gendersContainer", () => {
       // Display the user's selected gender
-      addChatUserMessage(`Gender: ${gender}`);
+      addChatUserMessage(`Genre: ${gender}`);
       
       // Update chatbot state with selected gender
       chatbotState.gender = gender;
@@ -226,9 +237,9 @@ export function loadGenders() {
             gendersContainer.classList.add("hidden");
             loadColors();
           }, 3000);
-        chatBody.scrollTop = chatBody.scrollHeight;
-      });}
-       else {
+          chatBody.scrollTop = chatBody.scrollHeight;
+        });
+      } else {
         // If "Cancel" is selected, go back to product types selection
         const productTypesContainer = document.getElementById("productTypesContainer");
         productTypesContainer.classList.remove("hidden");
@@ -238,9 +249,19 @@ export function loadGenders() {
       }
     });
   });
+  // Mettre à jour l'état d'affichage des genres à true
+  gendersDisplayed = true;
 }
+
+
+
+
+
+
+
+
 // Load color options
-function loadColors() {
+export function loadColors() {
   const colorsContainer = document.getElementById("colorsContainer");
 
   while (colorsContainer.firstChild) {
@@ -367,7 +388,7 @@ function loadColors() {
     createButton(product, "colorsContainer", () => {
 
       chatbotState.product = product;
-      addChatUserMessage(`product: ${chatbotState.product}`);
+      addChatUserMessage(`produit: ${chatbotState.product}`);
       showLoadingMessage(true);
       if (product !== "Cancel") {
 
@@ -404,6 +425,16 @@ function loadColors() {
     });
   });
 }
+
+
+
+
+
+
+
+
+
+
 // Load price options
 function loadPriceOptions() {
   const priceContainer = document.getElementById("priceContainer");
@@ -413,11 +444,11 @@ function loadPriceOptions() {
     priceContainer.removeChild(priceContainer.firstChild);
   }
   priceContainer.classList.remove("hidden");
-  const priceOptions = ["No", "select your price"];
+  const priceOptions = ["No", "sélectionnez votre prix"];
   priceOptions.forEach((option) => {
     createButton(option, "priceContainer", () => {
       chatbotState.price = option;
-      addChatUserMessage(`Price: ${chatbotState.price}`);
+      addChatUserMessage(`Prix: ${chatbotState.price}`);
       showLoadingMessage(true);
       if(option=="No")
     {  chatBody.scrollTop = chatBody.scrollHeight;
@@ -687,7 +718,7 @@ function resetChat() {
   var initialHtmlContent = `
   <div id="start_conv">
     <img src="https://kontakt.com.tn/web/image/292971/Chatbot%20icon.png" alt="Avatar" style="width: 40px; height: 40px; vertical-align: middle;border-radius: 30px;object-fit: cover;" />
-    <span style="vertical-align: middle"> Marhba bik sur KONTAKT 🥰! Nous vous proposons une large sélection de produits pour femmes, hommes, enfants et bébés . 👖👚 kifech najmou naawnouk ?</span>
+    <span style="vertical-align: middle">Marhba bik sur KONTAKT 🥰! Inscrivez-vous dès maintenant pour rejoindre notre grande famille 💛👨‍👩‍👧‍👧<br><a href='https://kontakt.com.tn/web/login' target='_blank'>kontakt.com.tn.SignUp </a><br> kifech najmou naawnouk ?</span>
   </div>
   <!-- Interaction flow containers -->
   <div id="chatbotMsg"></div>`;
