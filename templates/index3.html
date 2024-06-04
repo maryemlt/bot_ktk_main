@@ -61,7 +61,9 @@
       </div>
  
       <div id="chatbotBody">
+        
         <div id="start_conv">
+         
           <img
             src="https://kontakt.com.tn/web/image/292971/Chatbot%20icon.png"
             alt="Avatar"
@@ -73,8 +75,8 @@
               object-fit: cover;
             "
           />
- 
-          <span style="vertical-align: middle"> {{ initial_greeting }} </span>
+         
+          <span style="vertical-align: middle">  {{ initial_greeting|safe }} </span>
         </div>
         <!-- Interaction flow containers -->
         <div id="chatbotMsg"></div>

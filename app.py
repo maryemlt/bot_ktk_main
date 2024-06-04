@@ -5,7 +5,7 @@ from g4f.client import Client
 import copy
 import json
 import requests
-from groq import Groq
+
 
 import xmlrpc.client
 from datetime import datetime
@@ -62,9 +62,7 @@ instructions = (
 instructions_with_context = instructions + "\n\n" + combined_pdf_text
 # Client initialization
 client = Client()
-""" client = Groq(
-    api_key="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",
-) """
+
 
 # Original system message with the loaded knowledge base
 original_system_messages = [
@@ -73,7 +71,7 @@ original_system_messages = [
 
 
 
-initial_greeting = "Marhba bik sur KONTAKT 🥰! Nous vous proposons une large sélection de produits pour femmes, hommes, enfants et bébés . 👖👚 kifech najmou naawnouk ?"
+initial_greeting = "Marhba bik sur KONTAKT 🥰! Inscrivez-vous dès maintenant pour rejoindre notre grande famille 😉🌷<br><a href='https://kontakt.com.tn/web/login' target='_blank'>kontakt_com_tn_sign up</a><br> 👖👚<br></br> kifech najmou naawnouk ?"
 
 # Home page route
 @app.route('/')
@@ -246,7 +244,7 @@ def get_gender_prompt():
     if lan == "anglais":
         bot_message = " Perfect! 😊 Which category are you looking for? 🔍"
     elif lan == "français":
-        bot_message = "Parfait! 😊 Quelle catégorie de recherchez-vous? 🔍"
+        bot_message = "Parfait! 😊 Quelle catégorie recherchez-vous? 🔍"
     else: 
         bot_message = "Haiel barcha! 😊 spécifiez la categorie elli tlawej aliha? 🔍"
     
@@ -259,7 +257,7 @@ def get_price_prompt():
    
     if lan == "anglais":
         bot_message = "Thanks for the specifications. 🙏 Do you want to set a price? 💰"
-    elif lan == "francais":
+    elif lan == "français":
         bot_message = "Merci pour les spécifications. 🙏 Voulez-vous fixer un prix ? 💰"
     else:  # Assume darija as the default
         bot_message = "D'accord 🙏 t7eb tfaxi soum ? 💰"
