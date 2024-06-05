@@ -269,27 +269,28 @@ export function loadColors() {
   }
   colorsContainer.classList.remove("hidden");
 
-  var products = [];
+  var products=[]
   switch (chatbotState.productType) {
     case "jeans":
-      if (chatbotState.gender == 'Femme') {
-        products = [
-          "SLIM", "MUM", "JEGGING", "SKINNY", "MUM SLIM", "MUM", "BALLOON",
-          "CARGO", "CARPENTER", "STRAIGHT", "WIDE LEG", "FLARE", "CANCEL"
-        ];
-      }
-      else if (chatbotState.gender == 'Homme') {
-        products = [
-          "SLIM", "lOOSE", "SKINNY", "REGULAR", "DAD",
-          "CARGO", "CARPENTER", "STRAIGHT",
-        ];
-      }
-      else if (chatbotState.gender == 'Garçon') {
-        products = [
-          "SLIM", "lOOSE", "SKINNY", "REGULAR", "PARACHUTE ",
-          "CARGO", "CARPENTER", "STRAIGHT",
-        ];
-      }
+    case "jean":
+      if( chatbotState.gender =='Femme'){
+      products = [
+        "SLIM", "MUM", "JEGGING", "SKINNY", "MUM SLIM", "MUM", "BALLOON",
+        "CARGO", "CARPENTER", "STRAIGHT", "WIDE LEG", "FLARE","CANCEL"
+      ];
+    }
+    else if( chatbotState.gender =='Homme'){
+      products = [
+        "SLIM", "lOOSE","SKINNY", "REGULAR", "DAD",
+        "CARGO", "CARPENTER", "STRAIGHT",
+      ];
+    }
+    else if( chatbotState.gender =='Garçon'){
+      products = [
+        "SLIM", "lOOSE","SKINNY", "REGULAR", "PARACHUTE ",
+        "CARGO", "CARPENTER", "STRAIGHT",
+      ];
+    }
       break;
     case "t-shirt":
     case "t-shirts":
@@ -299,7 +300,7 @@ export function loadColors() {
       ];
       break;
     case "tops":
-    case "bodies":
+    case "boodies":
       products = [
         "BODY", "TOP", "BRETELLE",
         "BRASSIÈRE", "DEBARDEUR"
@@ -316,73 +317,154 @@ export function loadColors() {
     case "jupes":
       products = [
         "JUPE EN MAILLE", "JUPE EN JEANS", "COMBINAISON",
+       
       ];
-      break;
+   break;
     case "short":
     case "shorts":
       products = [
-        "SHORT EN MAILLE", "SHORT EN JEANS", "SHORT EN CHAINE & TRAME",
-      ];
-      break;
+            "SHORT EN MAILLE", "SHORT EN JEANS", "SHORT EN CHAINE & TRAME",
+           
+          ];
+       break;
     case "chemises-blouses":
     case "blouses":
     case "chemise":
     case "chemises":
-      products = [
-        "CHEMISE WESTERN"
-      ];
+      if( chatbotState.gender =='Garçon' || chatbotState.gender =='BEBE'){
+        products = [
+              "CHEMISE WESTERN" ,"SUR CHEMISE","CHEMISE REGULAR"
+             
+            ];}
+      else if(chatbotState.gender =='Homme'){
+        products = [
+          "CHEMISE WESTERN" ,"CHEMISE COL TUNISIEN","CHEMISE WORKWEAR"
+         
+        ];
+ 
+      }
+      else if(chatbotState.gender =='Femme'){
+        products = [
+          "CHEMISE WESTERN" ,"CHEMISES OVERSIZED","CHEMISES CROPPED","BLOUSES"
+         
+        ];
+ 
+      }
+      else if(chatbotState.gender =='Fille'){
+        products = [
+         "CHEMISE COL TUNISIEN","CHEMISE REGULAR","BLOUSES"
+         
+        ];
+ 
+      }
       break;
-    case "pantalons":
-      products = [
-        "PANTALON EN MAILLE", "PANTALON EN CHAINE ET TRAME"
-      ];
+      case "pantalons":
+      case "pantalon":
+        products = [
+              "PANTALON EN MAILLE", "PANTALON EN CHAINE ET TRAME"
+             
+            ];
       break;
-    case "polos":
+      case "polos":
+      case "polos":
       products = [
-        "POLO CROP",
-      ];
+              "POLO CROP",
+             
+            ];
       break;
-    case "sweats":
-      products = [
-        "SWEAT CROPPED",
-        "HOODIE REGULAR",
-        "HOODIE CROPPED ",
-        "HOODIE ZIPPÉ ",
-      ];
-      break;
-    case "swimwear":
-      products = [
-        "SHORT DE BAIN",
-      ];
-      break;
-    case "chaussette":
-    case "chaussettes":
-      products = [
-        "CHAUSSETTE",
-      ];
-      break;
-    case "joggers":
-      products = [
-        "JOGGER CARGO",
-        "JOGGER CHINO",
-        "JOGGER FLARE",
-        "JOGGER SLIM",
-        "JOGGER WIDE LEG",
-      ];
-      break;
-    case "pyjamas":
-      products = [
-        "TOP & PANTALON",
-        "TOP & SHORT",
-        "TOP & PANTACOURT",
-        "NUISETTE",
-        "ROBE DE PYJAMA",
-        "FEMME ENCEINTE",
-      ];
-      break;
+      case "sweats":
+      case "sweat":
+      case "hodies":
+      case "hodi":
+      case "hody":
+        products = [
+                "SWEAT CROPPED",
+                "HOODIE REGULAR",
+                "HOODIE CROPPED ",
+                "HOODIE ZIPPÉ ",
+               
+              ];
+        break;
+        case "swimwear":
+          products = [
+                  "SHORT DE BAIN",
+                 
+                 
+                ];
+          break;
+          case "chaussette":
+          case "chaussettes":
+            products = [
+                    "CHAUSSETTE",
+                   
+                   
+                  ];
+            break;
+          case "joggers":
+          case "jogger":
+            products = [
+                "JOGGER CARGO",
+                "JOGGER CHINO",
+                "JOGGER FLARE",
+                "JOGGER SLIM",
+                "JOGGER WIDE LEG",
+               
+              ];
+        break;
+        case "pyjamas":
+        case "pyjama":
+          if(chatbotState.gender =='Femme' || chatbotState.gender =='Fille'){
+           products = [
+                  "TOP & PANTALON",
+                  "TOP & SHORT",
+                  "TOP & PANTACOURT",
+                  "NUISETTE",
+                  "ROBE DE PYJAMA",
+                  "FEMME ENCEINTE",
+                 
+                ];}
+          else if(chatbotState.gender =='Homme' || chatbotState.gender =='Garçon'){
+            products = [
+              "T-SHIRT & PANTALON",
+              "T-SHIRT & SHORT",
+             
+              "DEBARDEUR & SHORT",
+             
+             
+            ];
+          }
+          break;
+        case "underwear":
+        case "sous_vetement":
+              if(chatbotState.gender =='Femme' || chatbotState.gender =='Fille'){
+               products = [
+                      "CULOTTE & SLIP",
+                      "CARACO & DEBARDEUR",
+                      "POLYAMIDE",
+                      "COTON BIO",
+                      "LIGNE CHAUDE",
+                      "FEMME ENCEINTE",
+                      "GRANDES TAILLES",
+                     
+                    ];}
+              else if(chatbotState.gender =='Homme' || chatbotState.gender =='Garçon'){
+                products = [
+                  "SLIP",
+                  "BOXER",
+                 
+                  "SINGLET & T-SHIRT",
+                  "COTON BIO",
+                  "LIGNE CHAUDE",
+                  "GRANDES TAILLES",
+                 
+                 
+                ];
+              }
+              break;
     default:
       products = [];  // Un cas par défaut, au cas où 'productType' est autre chose
   }
+
 
   products.forEach((product) => {
     createButton(product, "colorsContainer", () => {

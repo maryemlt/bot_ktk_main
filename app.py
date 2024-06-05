@@ -12,6 +12,7 @@ from datetime import datetime
 
 
 app = Flask(__name__)
+
 API_PRODUCTS = os.getenv('API_PRODUCTS')
 
 
@@ -49,6 +50,7 @@ instructions = (
    "You only respond in darija tunisienne."
    "You generate text only in English , in French or darija tunisienne"
    "You only respond in English , in French or darija tunisienne"
+   "Always respond in the same language used by the user, whether it is English, French, or Tunisian Darija."
  "You add an emoji at the end of the chat phrase."
   #"if you generate links, make sure they are clickable."
 
@@ -71,7 +73,7 @@ original_system_messages = [
 
 
 
-initial_greeting = "Marhba bik sur KONTAKT 🥰! Inscrivez-vous dès maintenant pour rejoindre notre grande famille 😉🌷<br><a href='https://kontakt.com.tn/web/login' target='_blank'>kontakt_com_tn_sign up</a><br> 👖👚<br></br> kifech najmou naawnouk ?"
+initial_greeting = "Marhba bik sur KONTAKT 🥰! Inscrivez-vous dès maintenant pour rejoindre notre grande famille 💛👨‍👩‍👧‍👧<br><a href='https://kontakt.com.tn/web/signup' target='_blank'>kontakt.com.tn.SignUp </a><br> kifech najmou naawnouk ?"
 
 # Home page route
 @app.route('/')
@@ -89,8 +91,11 @@ def chooseLang():
 
 # Route to handle greetings
 greetings = {"hi", "hello", "good", "good morning", "hey", "hello"}
-product_keywords = ['t-shirts', 'jeans','chemises','blouses','tops','bodies','robes','combinaisons','jupes','shorts','pantalons','sweats','hoodies','blazers','cardigans','jackets','manteaux','joggers','polos','swimwear','accessoires']  # Define your product keywords
- 
+product_keywords = ['t-shirts','t-shirt', 'jeans','jean','chemises','chemise','blouses','blouse','tops','top','bodies','body','bodie','chemises-blouses',
+                    'robes','robe','combinaisons','combinaison','jupes','jupe','shorts','short','pantalons',
+                    'pantalon','sweats','sweat','hoodies','hoodie','hoody','blazers','blazer','cardigans','cardigan','jackets','jacket',
+                    'manteaux','manteau','joggers','jogger','polos','polo','swimwear','pyjamas','pyjama',
+                    'accessoires','accessoir','underwear','sous-vetement']
 # Send message route
 @app.route('/get_product', methods=['POST'])
 def receive_chatbot_state():
@@ -212,9 +217,9 @@ def send_message():
             if lan == "anglais":
               bot_message = f"Great 🤗! To assist you better, could you tell me the gender you are looking for 🤔👤?"
             elif lan =="darija tunisienne":
-                 bot_message = f"super 🤗! bech najim naawnek akther , chnouwa naw3 elli tlawej alih 🤔👤 ?"
+                 bot_message = f"Cool 🤗! bech najim naawnek akther , chnouwa naw3 elli tlawej alih 🤔👤 ?"
             else:
-                 bot_message = f"super 🤗! Pour mieux vous aider, pourriez-vous me dire le genre que vous recherchez 🤔👤?"
+                 bot_message = f"Super 🤗! Pour mieux vous aider, pourriez-vous me dire le genre que vous recherchez 🤔👤?"
 
         else:
             # No product keyword found, continue with a standard chatbot response
@@ -238,15 +243,27 @@ def send_message():
         'bot_response': bot_message,
         'product_mentioned': product_mentioned if product_mentioned else "No product"
     })
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/get_gender_prompt', methods=['POST'])
 def get_gender_prompt():
     
     if lan == "anglais":
-        bot_message = " Perfect! 😊 Which category are you looking for? 🔍"
+        bot_message = " Perfect ! 😊 Which category are you looking for? 🔍"
     elif lan == "français":
-        bot_message = "Parfait! 😊 Quelle catégorie recherchez-vous? 🔍"
+        bot_message = "Parfait ! 😊 Quelle catégorie recherchez-vous? 🔍"
     else: 
-        bot_message = "Haiel barcha! 😊 spécifiez la categorie elli tlawej aliha? 🔍"
+        bot_message = "Super ! 😊 spécifiez la categorie elli tlawej aliha? 🔍"
     
     return jsonify({'message': bot_message})
 
